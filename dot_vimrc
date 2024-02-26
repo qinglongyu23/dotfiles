@@ -1,0 +1,135 @@
+" ==================== Installation Requirements ====================
+
+" 1. Vundle: Vim plugin manager. Install with git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+" 2. indentLine Plugin: Will be installed automatically by :PluginInstall
+" 3. Xclip (Linux): For clipboard support. Install with sudo apt install xclip
+
+" ========================== Configuration Features ==========================
+
+
+
+" -------------------------- Theming --------------------------
+
+" Set theme to catppuccin_frappe for a pleasant coding experience
+set termguicolors
+colorscheme catppuccin_macchiato
+
+
+" -------------------------- Line Numbering --------------------------
+
+" Enable line numbers with dark grey and bold font
+set nu
+hi LineNr cterm=None ctermfg=DarkGrey ctermbg=None
+
+" Highlight current line number in green
+hi CursorLineNr cterm=bold ctermfg=Green ctermbg=None
+
+
+" -------------------------- Clipboard --------------------------
+
+" Use system clipboard for seamless copy/paste across applications
+set clipboard=unnamedplus
+
+" -------------------------- Searching --------------------------
+
+" Start search as you type, highlight matches and reverse highlight color
+set incsearch
+set hlsearch
+hi Search cterm=reverse ctermbg=None ctermfg=None
+
+" -------------------------- Autocompletion and Indentation --------------------------
+
+" Enable auto-indent with a tab size of 4
+set ai
+set tabstop=4
+set shiftwidth=4
+set expandtab
+
+" Configure indentLine plugin to use vertical bars
+let g:indentLine_color_term = 244
+let g:indentLine_chat = '|'
+
+
+
+
+
+" Show imcompleted command
+set showcmd
+
+syntax on " Enable syntax highlight
+
+
+" Highlight current line
+"set cursorline 
+"" Define a function to update the status line in Insert mode
+
+" -------------------------- Status Line --------------------------
+
+" Enable and configure the status line
+set laststatus=2
+set statusline=%<\ File:\ %#stFilename#%f%*\ %y\ %#stChanged#%m%*\ %r\ %=%p%%\ Line:%3l/%3L\ Column:%2c\ 
+
+hi StatusLine ctermbg=None ctermfg=white cterm=bold guibg=NONE
+
+"" Set Status Line Filename Format
+hi stFilename ctermfg=green ctermbg=None cterm=underline
+"" Set Status Line Modified Format
+hi stChanged ctermfg=white ctermbg=red cterm=bold
+
+
+" Function to update status line in Insert mode
+function! InsertStatusline()
+    hi stFilename ctermfg=magenta ctermbg=cyan cterm=bold
+endfunction
+
+" Function to reset status line to Normal mode
+function! NormalStatusline()
+    hi stFilename ctermfg=green ctermbg=None cterm=underline
+endfunction
+
+" Autocommands for dynamic status line updates
+augroup statusline
+    autocmd!
+    autocmd InsertEnter * call InsertStatusline()
+    autocmd InsertLeave * call NormalStatusline()
+augroup END
+
+
+
+
+"let g:system_copy#copy_command='xclip -sel clipboard'
+
+hi Normal guibg=NONE ctermbg=NONE
+
+"set nocompatible              " be iMproved, required
+"filetype off                  " required
+
+
+" ========================= Plugin Management =========================
+"
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+Plugin 'google/vim-jsonnet'
+Plugin 'christoomey/vim-system-copy'
+Plugin 'Yggdroot/indentLine'
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
