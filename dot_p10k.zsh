@@ -20,7 +20,6 @@
 # If you like the general style of Pure but not particularly attached to all its quirks, type
 # `p10k configure` and pick "Lean" style. This will give you slick minimalist prompt while taking
 # advantage of Powerlevel10k features that aren't present in Pure.
-
 # Temporarily change options.
 'builtin' 'local' '-a' 'p10k_config_opts'
 [[ ! -o 'aliases'         ]] || p10k_config_opts+=('aliases')
@@ -69,14 +68,19 @@
   # Right prompt segments.
   typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
     # =========================[ Line #1 ]=========================
-    anaconda
     command_execution_time    # previous command duration
+    #status                    # Last exit code ($?)
+    mystatus 
+    #context                   # user@host
     virtualenv                # python virtual environment
-    context                   # user@host
-    time                      # current time
+    anaconda
+    #time                      # current time
     # =========================[ Line #2 ]=========================
     newline                   # \n
   )
+
+
+  typeset -g POWERLEVEL9K_STATUS_ERROR=true
 
   # Basic style options that define the overall prompt look.
   typeset -g POWERLEVEL9K_BACKGROUND=                            # transparent background
@@ -94,7 +98,7 @@
   typeset -g POWERLEVEL9K_PROMPT_ADD_NEWLINE=false
 
   # Magenta prompt symbol if the last command succeeded.
-  typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_{VIINS,VICMD,VIVIS}_FOREGROUND=$magenta
+  typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_{VIINS,VICMD,VIVIS}_FOREGROUND=$blue
   # Red prompt symbol if the last command failed.
   typeset -g POWERLEVEL9K_PROMPT_CHAR_ERROR_{VIINS,VICMD,VIVIS}_FOREGROUND=$red
   # Default prompt symbol.
@@ -164,7 +168,7 @@
   typeset -g POWERLEVEL9K_VCS_UNTRACKED_ICON="%F{$red}○"
 
   typeset -g POWERLEVEL9K_VCS_STAGED_ICON="%F{$green}ꚰ"
-  typeset -g POWERLEVEL9K_VCS_CLEAN_ICON='✔️'
+  typeset -g POWERLEVEL9K_VCS_CLEAN_ICON='✅'
 
   # Show '*' when there are staged, unstaged or untracked files.
   typeset -g POWERLEVEL9K_VCS_DIRTY_ICON=''
@@ -233,3 +237,22 @@ function prompt_word_in() {
   p10k segment -f 255 -t 'in'
 }
 
+# Initialize a global variable to store the exit status
+typeset -g MY_LAST_CMD_STATUS=0
+
+# Define a precmd hook to update the MY_LAST_CMD_STATUS variable
+precmd_functions+=(update_my_last_cmd_status)
+update_my_last_cmd_status() {
+  MY_LAST_CMD_STATUS=$?
+}
+
+
+function prompt_mystatus() {
+  if [[ $MY_LAST_CMD_STATUS -eq "0" ]]; then
+    # If the exit status is 0 (no error), show a check emoji
+    p10k segment  -t '✅' 
+  else
+    # If the exit status is not 0 (error), show a red cross and the error code in parentheses
+    p10k segment -f 1 -i LOCK_ICON -r -t "(❌$MY_LAST_CMD_STATUS)"
+  fi
+}
