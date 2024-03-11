@@ -37,7 +37,7 @@
   [[ $ZSH_VERSION == (5.<1->*|<6->.*) ]] || return
 
   # Prompt colors.
-  local grey='242'
+  local grey='252'
   local red='1'
   local dark_red='162'
   local yellow='3'
@@ -46,7 +46,8 @@
   local orange='208'
   local cyan='6'
   local white='7'
-  local green='154'
+  local green='2'
+  local bright_green='154'
 
   # Left prompt segments.
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
@@ -91,8 +92,8 @@
 
   typeset -g POWERLEVEL9K_HOST_FOREGROUND=$orange
   typeset -g POWERLEVEL9K_USER_FOREGROUND=$dark_red
-  typeset -g POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX='%F{154}╭─'
-  typeset -g POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%F{154}╰─"
+  typeset -g POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="%F{$green}╭─"
+  typeset -g POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%F{$green}╰─"
   # Add an empty line before each prompt except the first. This doesn't emulate the bug
   # in Pure that makes prompt drift down whenever you use the Alt-C binding from fzf or similar.
   typeset -g POWERLEVEL9K_PROMPT_ADD_NEWLINE=false
@@ -117,12 +118,12 @@
   typeset -g POWERLEVEL9K_VIRTUALENV_{LEFT,RIGHT}_DELIMITER=
 
   typeset -g POWERLEVEL9K_ANACONDA_SHOW_PYTHON_VERSION=false
-  typeset -g POWERLEVEL9K_ANACONDA_FOREGROUND='252'
+  typeset -g POWERLEVEL9K_ANACONDA_FOREGROUND="$grey"
 
 
 
   # Blue current directory.
-  typeset -g POWERLEVEL9K_DIR_FOREGROUND=$green
+  typeset -g POWERLEVEL9K_DIR_FOREGROUND=$bright_green
 
   # Context format when root: user@host. The first part white, the rest grey.
   typeset -g POWERLEVEL9K_CONTEXT_ROOT_TEMPLATE="%F{$white}%n%f%F{$grey}@%m%f"
@@ -250,7 +251,7 @@ update_my_last_cmd_status() {
 function prompt_mystatus() {
   if [[ $MY_LAST_CMD_STATUS -eq "0" ]]; then
     # If the exit status is 0 (no error), show a check emoji
-    p10k segment  -t '✅' 
+    p10k segment -f 2 -t '(✅)' 
   else
     # If the exit status is not 0 (error), show a red cross and the error code in parentheses
     p10k segment -f 1 -i LOCK_ICON -r -t "(❌$MY_LAST_CMD_STATUS)"
