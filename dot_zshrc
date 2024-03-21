@@ -81,7 +81,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-plugins=(zsh-autosuggestions git enhancd)
+plugins=(zsh-autosuggestions git enhancd ssh-agent)
 
 source $ZSH/oh-my-zsh.sh
 
