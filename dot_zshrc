@@ -135,7 +135,8 @@ alias p10='ping 10.10.0.1'
 
 export PATH="$HOME/.cargo/bin:$HOME/.local/bin:$PATH"
 
-. /$HOME/z.sh
+#. /$HOME/z.sh
+eval "$(zoxide init zsh)"
 export VISUAL=vim
 export EDITOR="$VISUAL"
 export LS_COLORS="$(vivid generate catppuccin-macchiato)"
@@ -173,3 +174,13 @@ export FZF_CTRL_R_OPTS="
   --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
   --color header:italic"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+
+function fh() {
+  fd -IH | fzf "$@"
+}
+
+function vimig(){
+  vim $(fd -IH | fzf "$@")
+}
+
