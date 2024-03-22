@@ -15,6 +15,8 @@ require("lazy").setup({
 	{ "LazyVim/LazyVim", import = "lazyvim.plugins" },
 	{ import = "plugins" },
 	{ import = "lazyvim.plugins.extras.coding.copilot" },
+	{ import = "lazyvim.plugins.extras.lang.rust" },
+	{ import = "lazyvim.plugins.extras.lang.docker" },
 }, {
 	install = {
 		colorscheme = { "catppuccin" },
