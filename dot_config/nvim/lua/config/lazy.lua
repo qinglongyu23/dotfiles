@@ -31,3 +31,12 @@ require("lazy").setup({
 })
 
 vim.cmd("highlight VertSplit guifg=#D8ABCE")
+
+local chatgpt_config = {
+
+	openai_params = {
+		model = "gpt-4-turbo-preview",
+		max_tokens = 4096,
+	},
+}
+require("chatgpt").setup(chatgpt_config)
