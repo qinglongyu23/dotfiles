@@ -131,7 +131,7 @@ alias plisten="sudo lsof -i -n -P | grep 'NAME\|LISTEN' |\
 | column -t"
 alias p1='ping 1.1.1.1'
 alias p10='ping 10.10.0.1'
-
+alias zj='zellij'
 
 export PATH="$HOME/.cargo/bin:$HOME/.local/bin:$PATH"
 
@@ -165,7 +165,7 @@ unset __conda_setup
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-source /home/qlyu095b/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source "$HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 export FZF_CTRL_R_OPTS="
   --layout reverse
