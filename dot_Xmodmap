@@ -1,0 +1,4 @@
+clear lock
+keycode 66 = asciitilde Caps_Lock
+keycode 66 = Escape asciitilde asciitilde
+
