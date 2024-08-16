@@ -132,6 +132,13 @@ alias plisten="sudo lsof -i -n -P | grep 'NAME\|LISTEN' |\
 alias p1='ping 1.1.1.1'
 alias p10='ping 10.10.0.1'
 alias zj='zellij'
+alias clip='xsel -b'
+alias icat="kitten icat"
+
+alias gdiff="GIT_EXTERNAL_DIFF=difft git diff"
+alias gdiffn="git difftool --tool=nvimdiff"
+
+
 
 export PATH="$HOME/.cargo/bin:$HOME/.local/bin:$PATH"
 
@@ -184,3 +191,12 @@ function vimig(){
   vim $(fd -IH | fzf "$@")
 }
 
+function zjt(){
+  zellij action new-tab -c $PWD -n "$1" -l default
+}
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export TIMEFMT=$'\nreal\t%*E\nuser\t%*U\nsys\t%*S'
