@@ -133,7 +133,10 @@ alias p1='ping 1.1.1.1'
 alias p10='ping 10.10.0.1'
 alias zj='zellij'
 alias clip='xsel -b'
-alias icat="kitten icat"
+alias icat='wezterm imgcat'
+alias show_icat='f() { for x in $(ls *${1:-png} | grep ${2:-Vds=0.1V}); do icat "$x"; done; unset -f f; }; f'
+alias wssh="wezterm ssh"
+
 
 alias gdiff="GIT_EXTERNAL_DIFF=difft git diff"
 alias gdiffn="git difftool --tool=nvimdiff"
@@ -148,7 +151,7 @@ export VISUAL=vim
 export EDITOR="$VISUAL"
 export LS_COLORS="$(vivid generate catppuccin-macchiato)"
 
-eval $(thefuck --alias)
+#eval $(thefuck --alias)
 
 
 
@@ -200,3 +203,11 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 export TIMEFMT=$'\nreal\t%*E\nuser\t%*U\nsys\t%*S'
+
+# pnpm
+export PNPM_HOME="/home/qlyu095b/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
