@@ -211,3 +211,15 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+eval "$(codex completion zsh)"
+
+# opencode
+export PATH=/home/qlyu095b/.opencode/bin:$PATH
+
+# bun completions
+[ -s "/home/qlyu095b/.bun/_bun" ] && source "/home/qlyu095b/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
