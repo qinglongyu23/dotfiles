@@ -149,7 +149,9 @@ export PATH="$HOME/.cargo/bin:$HOME/.local/bin:$PATH"
 eval "$(zoxide init zsh)"
 export VISUAL=vim
 export EDITOR="$VISUAL"
-export LS_COLORS="$(vivid generate catppuccin-macchiato)"
+if command -v vivid >/dev/null; then
+  export LS_COLORS="$(vivid generate catppuccin-macchiato)"
+fi
 
 #eval $(thefuck --alias)
 
@@ -212,7 +214,9 @@ case ":$PATH:" in
 esac
 # pnpm end
 
-eval "$(codex completion zsh)"
+if command -v codex >/dev/null; then
+  eval "$(codex completion zsh)"
+fi
 
 # opencode
 export PATH=/home/qlyu095b/.opencode/bin:$PATH
